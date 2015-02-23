@@ -25,4 +25,5 @@ WORKDIR /data/spark-1.2.1
 RUN mvn -DskipTests clean package
 
 # Define default command.
-CMD ["bash"]
+CMD ["./sbin/start-master.sh"]
+EXPOSE 8080 7077
