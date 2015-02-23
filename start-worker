@@ -1,0 +1,3 @@
+#!/bin/bash
+MASTER=$1
+docker run --net="host" -d spark-1.2.1 ./bin/spark-class org.apache.spark.deploy.worker.Worker spark://${MASTER}:7077 
