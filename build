@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t "spark 1.2.1" . 
+docker build -t spark-1.2.1 . 
