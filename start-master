@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run --net=host -p 8080:8080 -p 7077:7077 -t -i spark-1.2.1 ./sbin/start-master.sh
+docker run --net=host -p 8080:8080 -p 7077:7077 -d spark-1.2.1 ./sbin/start-master.sh
