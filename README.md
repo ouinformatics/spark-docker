@@ -2,7 +2,17 @@
 
 ```
 git clone https://github.com/ouinformatics/spark-docker
-cd spark-docker
-docker build -t "spark-1.2.1" .
-docker run -d spark-1.2.1 ./sbin/start-master.sh
+
+## Use docker hub image
+## on first node:
+./start-master
+
+## 
+./start-worker worker.domain.com master.domain.com
 ```
+
+You can also build your own from the `Dockerfile`
+```
+docker build -t spark .
+```
+
