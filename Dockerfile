@@ -24,6 +24,9 @@ RUN tar -xzvf spark-1.2.1.tgz
 WORKDIR /data/spark-1.2.1
 RUN mvn -DskipTests clean package
 
+ADD /bin/startup.sh /data/startup.sh
+
 # Define default command.
-CMD ["./sbin/start-master.sh"]
+ENTRYPOINT /data/startup.sh
+
 EXPOSE 8080 7077
