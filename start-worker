@@ -1,3 +1,4 @@
 #!/bin/bash
-MASTER_HOST=$1
-docker run --net="host" -e MASTER="${MASTER_HOST}:7077" -e MODE="worker" -d spark-1.2.1 
+DOCKER_NODE=$1
+MASTER_HOST=$2
+ssh ${DOCKER_NODE} docker run --net="host" -e MASTER="${MASTER_HOST}:7077" -e MODE="worker" -d jduckles/spark-1.2.1 
