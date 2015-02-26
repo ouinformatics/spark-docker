@@ -7,9 +7,18 @@ git clone https://github.com/ouinformatics/spark-docker
 ## on first node:
 ./start-master
 
-## Start worker will SSH as the current user to worker.domain.com
-##  to start the worker docker container. 
-./start-worker worker.domain.com master.domain.com
+## Create a nodes file, label master node with an m
+node1 m
+node2
+node3
+node4
+
+## Start worker will SSH as the current user all nodes in
+## `nodes` file
+./start-worker 
+
+## Kill all workers across the nodes
+./start-worker -k
 ```
 
 For testing purposes you can try this on a single machine to act as worker and master.
