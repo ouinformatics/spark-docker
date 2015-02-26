@@ -1,4 +1,42 @@
 #!/bin/bash
-DOCKER_NODE=$1
-MASTER_HOST=$2
-ssh ${DOCKER_NODE} docker run --net="host" -e MASTER="${MASTER_HOST}:7077" -e MODE="worker" -d jduckles/spark-1.2.1 
+DOCKER_TAG=jduckles/spark-1.2.1
+MOUNTS="-v /mnt/shared10:/mnt/shared10"
+set -e
+
+start_worker() {
+    ## Start a node
+    local node=$1
+    OPTIONS="--net="host" -e MASTER="${MASTER_HOST}:7077" -e MODE=worker"
+    ssh $node docker run ${OPTIONS} ${MOUNTS} --name spark-worker -d ${DOCKER_TAG}
+}
+
+kill_worker() {
+    ## Kill all running dockers with the same tag 
+    echo " killing workers at $node"
+    local node=$1
+    ssh $node 'for cont in `docker ps -q --filter name=spark-worker`; do docker kill $cont; done' || echo "No workers found"
+    ssh $node 'docker rm spark-worker' || echo "No workers to delete"
+}
+
+while getopts ":k" opt; do
+  case $opt in
+    k)
+      for node in $(cut -f1 -d" " nodes); do
+        kill_worker $node
+      done
+       ;;
+    \?)
+      echo "Invalid option"
+       ;;
+   esac
+done
+
+if [ -f "nodes" ]; then
+    MASTER_HOST=$(grep -i " m$" nodes | sed 's/ m//g')
+    echo 'Using nodes from `nodes` file in current directory: '
+    for node in $(cut -f1 -d" " nodes); do
+        start_worker $node
+    done
+else
+   echo 'Create a `nodes` file'
+fi
