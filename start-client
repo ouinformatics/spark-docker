@@ -1,0 +1,3 @@
+#!/bin/bash
+DOCKER_TAG=jduckles/spark-1.2.1
+docker run --net="host" -i -t -v /mnt/shared10:/mnt/shared10 -e MODE=client  ${DOCKER_TAG} 
