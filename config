@@ -1,2 +1,0 @@
-DOCKER_TAG=jduckles/spark:1.2.1
-MOUNTS="-v /mnt/shared10:/mnt/shared10"
