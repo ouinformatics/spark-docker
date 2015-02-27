@@ -27,7 +27,7 @@ RUN mvn -DskipTests clean package
 
 RUN apt-get update && apt-get install -y ipython ipython-notebook python-gdal python-numpy 
 
-ADD /bin/startup.sh /data/startup.sh
+ADD startup.sh /data/startup.sh
 
 # Define default command.
 ENTRYPOINT /data/startup.sh
