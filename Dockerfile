@@ -19,10 +19,13 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 RUN apt-get update && apt-get install -y maven
 
+
 RUN wget http://mirrors.sonic.net/apache/spark/spark-1.2.1/spark-1.2.1.tgz
 RUN tar -xzvf spark-1.2.1.tgz
 WORKDIR /data/spark-1.2.1
 RUN mvn -DskipTests clean package
+
+RUN apt-get update && apt-get install -y ipython ipython-notebook python-gdal python-numpy 
 
 ADD /bin/startup.sh /data/startup.sh
 
