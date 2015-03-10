@@ -25,8 +25,6 @@ RUN tar -xzvf spark-1.2.1.tgz
 WORKDIR /data/spark-1.2.1
 RUN mvn -DskipTests clean package
 
-RUN apt-get update && apt-get install -y ipython ipython-notebook python-gdal python-numpy 
-
 ADD startup.sh /data/startup.sh
 
 # Define default command.
